@@ -15,7 +15,7 @@ export const Distance = (p1: Position, p2: Position): number => {
     )
 }
 
-export const ClosestStar = (): Star => {
+function findClosestStar(): Star {
     return Distance(
         base.position,
         star_a1c.position
@@ -24,6 +24,8 @@ export const ClosestStar = (): Star => {
         star_zxq.position
     ) ? star_a1c : star_zxq
 }
+
+export const ClosestStar = findClosestStar()
 
 var size = my_spirits.length / 3
 
