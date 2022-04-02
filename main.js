@@ -15,10 +15,10 @@ for (var fleet of worker_fleet) {
     for (var worker of fleet) {
         var target;
     
-        if(worker_fleet_B.includes(worker)) {
+        if(worker_fleet_A.includes(worker)) {
+            target = star_p89
+        } else if (worker_fleet_B.includes(worker)) {
             target = star_zxq
-        } else if (worker_fleet_A.includes(worker)) {
-            target = star_a1c
         } else {
             target = base
         }
