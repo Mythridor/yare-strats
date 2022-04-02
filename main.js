@@ -29,7 +29,7 @@ for (var fleet of worker_fleet) {
             worker.energize(base)
         }
     
-        if (worker.energy < worker.energy_capacity){
+        if (worker.energy == worker.energy_capacity){
             worker.set_mark("charging")
         } else if (worker.energy == 0){
             worker.set_mark("harvesting")
