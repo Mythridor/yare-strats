@@ -60,8 +60,12 @@ for (var soldier of soldier_fleet) {
             soldier.move(soldier_closest_star.position);
             soldier.energize(soldier);
         case 'attacker':
-            if (enemy_in_sight.length > 0) {
-                soldier.move(enemy_in_sight[0]);
+            soldier.move(soldier_target.position)
+
+            if (invader || soldier.energy > 5) {
+                soldier.energize(invader);
+            } else {
+                soldier.set_mark("harvester")
             }
     }
 
