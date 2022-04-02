@@ -4,6 +4,7 @@
 
 import RenderService from 'yare-code-sync/client/RenderService'
 
+RenderService.circle(my_spirits[0], 100);
 // Your code goes here
 // Activate it by pressing the button below or with SHIFT+ENTER
 
