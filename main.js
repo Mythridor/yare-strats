@@ -47,6 +47,15 @@ for (var fleet of worker_fleet) {
 
 
 for (var soldier of soldier_fleet) {
+    switch (soldier.mark) {
+        case 'harvester':
+            soldier.move(soldier_closest_star.position);
+            soldier.energize(soldier);
+        case 'attacker':
+            if (enemy_in_sight.length > 0) {
+                soldier.move(enemy_in_sight[0]);
+            }
+    }
     enemy_in_sight = soldier.sight.enemies
     soldier.move(star_zxq.position)
     if (soldier.sight.enemies.length > 0){
