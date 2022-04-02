@@ -115,6 +115,7 @@ declare const enemy_base: Base
 declare const bases: Record<`base_${string}`, Base>
 declare const star_zxq: Star
 declare const star_a1c: Star
+declare const star_p89: Star
 declare const stars: Record<`star_${string}`, Star>
 
 declare const this_player_id: string
