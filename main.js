@@ -56,11 +56,14 @@ for (var soldier of soldier_fleet) {
                 soldier.move(enemy_in_sight[0]);
             }
     }
+
+    var soldier_target = star_p89
+    var soldier_closest_star = star_p89
+
     enemy_in_sight = soldier.sight.enemies
-    soldier.move(star_zxq.position)
-    if (soldier.sight.enemies.length > 0){
-        var invader = soldier.sight.enemies[0]
-        if (soldier.energy > 25) soldier.set_mark("attacker")
+    structure_in_sight = soldier.sight.structures
+    
+    var invader = enemy_in_sight[0]
         if (soldier.mark == "attacker") {
             soldier.move(invader.position)
             soldier.energize(invader)
