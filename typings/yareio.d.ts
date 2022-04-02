@@ -1,124 +1,189 @@
-/* Type definitions for the various objects you have access to in Yare. */
+// Minimum TypeScript Version: 4.1
+/* Type definitions for the various objects you have access to in Yare.io. */
 
-declare const memory: Record<string, unknown> // You will probably want to change this
+declare const memory: Record<string, unknown>; // You will probably want to change this
 
-declare type Position = [x: number, y: number]
+type Position = [x: number, y: number];
+type PlayerID = string;
+type SpiritID = `${PlayerID}_${number}`;
+type StructureType = "base" | "outpost" | "star";
+type StructureID = `${StructureType}_${string}`;
+type BaseID = `base_${string}`;
+type OutpostID = `outpost_${string}`;
+type StarID = `star_${string}`;
+type EntityID = SpiritID | StructureID;
+type Shape = "circles" | "squares" | "triangles";
 
-declare interface Sight {
-	friends: `${string}${number}`[]
-	friends_beamable: `${string}${number}`[]
-	enemies: `${string}${number}`[]
-	enemies_beamable: `${string}${number}`[]
-	structures: `${string}${number}`[]
+interface OutpostSight extends Object {
+	enemies: SpiritID[];
 }
 
-declare interface Entity {
-	id: string,
-	position: Position
+interface Sight extends OutpostSight {
+	friends: SpiritID[];
+	friends_beamable: SpiritID[];
+	enemies_beamable: SpiritID[];
+	structures: StructureID[];
 }
 
-declare interface ArtificialEntity extends Entity {
-	size: number
-	energy_capacity: number
-	energy: number
-	hp: 0 | 1
-	sight: Sight
-
-	player_id: string
-	shape: "circles" | "squares" | "triangles"
-	color: string
+interface Entity extends Object {
+	id: string;
+	position: Position;
+	size: number;
+	energy: number;
+	last_energized: "" | EntityID;
+	energy_capacity: number;
 }
 
-declare interface SpiritBase extends ArtificialEntity {
-	id: `${string}${number}`
+interface Destructible extends Entity {
+	hp: number;
+	sight: Sight;
 
-	merged: `${string}${number}`[]
-	move_speed: number
-	mark: string
-
-	move: (target: Position) => void
-	energize: (target: ArtificialEntity) => void
-	shout: (message: string) => void
-	set_mark: (label: string) => void
+	player_id: PlayerID;
+	shape: Shape;
+	color: string;
 }
 
-declare interface Circle extends SpiritBase {
-	merge: (target: Circle) => void
-	divide: () => void
+interface _Spirit extends Destructible {
+	id: SpiritID;
 
-	shape: "circles"
+	hp: 0 | 1;
+	merged: SpiritID[];
+	move_speed: number;
+	mark: string;
+
+	move(target: Position): void;
+	energize(target: Entity): void;
+	shout(message: string): void;
+	set_mark(label: string): void;
 }
 
-declare interface Square extends SpiritBase {
-	size: 10
-	energy_capacity: 100
+interface CircleSpirit extends _Spirit {
+	merge(target: CircleSpirit): void;
+	divide(): void;
 
-	shape: "squares"
-
-	jump: (target: Position) => void
+	shape: "circles";
 }
 
-declare interface Triangle extends SpiritBase {
-	size: 10
-	energy_capacity: 100
+interface SquareSpirit extends _Spirit {
+	size: 10;
+	energy_capacity: 100;
 
-	shape: "triangles"
+	shape: "squares";
+
+	jump(target: Position): void;
 }
 
-type Spirit = Circle | Square | Triangle
+interface TriangleSpirit extends _Spirit {
+	size: 3;
+	energy_capacity: 30;
 
-declare interface Structure extends Entity {
-	structure_type: string
+	explode(): void;
+
+	shape: "triangles";
 }
 
-declare interface Base extends Structure, ArtificialEntity {
-	id: `base_${string}`
-	structure_type: 'base'
-	size: 40
-	sight: Sight
-	current_spirit_cost: number
+type Spirit = CircleSpirit | SquareSpirit | TriangleSpirit;
+
+interface _Structure extends Entity {
+	structure_type: StructureType;
+	collision_radius: number;
 }
 
-declare interface CircleBase extends Base {
-	energy_capacity: 400
-
-	shape: "circles"
+interface _Base extends _Structure, Destructible {
+	id: BaseID;
+	structure_type: "base";
+	size: 40;
+	current_spirit_cost: number;
 }
 
-declare interface SquareBase extends Base {
-	energy_capacity: 1000
+interface CircleBase extends _Base {
+	energy_capacity: 400;
 
-	shape: "squares"
+	shape: "circles";
 }
 
-declare interface TriangleBase extends Base {
-	energy_capacity: 500
+interface SquareBase extends _Base {
+	energy_capacity: 1000;
 
-	shape: "triangles"
+	shape: "squares";
 }
 
-declare interface Star extends Structure {
-	id: `star_${string}`
-	structure_type: 'star'
-	position: Position
+interface TriangleBase extends _Base {
+	energy_capacity: 600;
+
+	shape: "triangles";
 }
 
-declare interface Players {
-	p1: string
-	p2: string
+type Base = SquareBase | CircleBase | TriangleBase;
+
+interface Outpost extends _Structure {
+	id: OutpostID;
+	structure_type: "outpost";
+	position: [2200, 1100];
+	size: 20;
+	energy_capacity: 1000;
+	range: 400 | 600;
+	sight: OutpostSight;
+
+	control: PlayerID;
 }
 
-declare const my_spirits: Spirit[]
-declare const spirits: Record<string, Spirit>
-declare const base: Base
-declare const enemy_base: Base
-declare const bases: Record<`base_${string}`, Base>
-declare const star_zxq: Star
-declare const star_a1c: Star
-declare const star_p89: Star
-declare const stars: Record<`star_${string}`, Star>
+interface _Star extends _Structure {
+	id: StarID;
+	structure_type: "star";
 
-declare const this_player_id: string
-declare const players: Players
+	active_in: number;
+	active_at: number;
+}
 
-declare const CODE_VERSION: string
+interface LargeStar extends _Star {
+	size: 220;
+
+	active_at: 0;
+}
+
+interface SmallStar extends _Star {
+	size: 80;
+
+	active_at: 100;
+}
+
+interface Graphics {
+	style: string;
+	linewidth: number;
+	line(start: Position, end: Position): void;
+	circle(pos: Position, r: number): void;
+	rect(tl: Position, br: Position): void;
+}
+
+type Star = LargeStar | SmallStar;
+
+type Structure = Base | Outpost | Star;
+
+declare const my_spirits: CircleSpirit[] | SquareSpirit[] | TriangleSpirit[];
+declare const spirits: Record<SpiritID, (CircleSpirit | SquareSpirit)> | Record<SpiritID, (CircleSpirit | TriangleSpirit)> | Record<SpiritID, (SquareSpirit | TriangleSpirit)>;
+declare const base: Base;
+declare const enemy_base: Base;
+declare const bases: Record<BaseID, (CircleBase | SquareBase)> | Record<BaseID, (CircleBase | TriangleBase)> | Record<BaseID, (SquareBase | TriangleBase)>;
+declare const outpost_mdo: Outpost;
+declare const outpost: Outpost;
+declare const outposts: Record<OutpostID, Outpost>;
+declare const star_zxq: LargeStar;
+declare const star_a1c: LargeStar;
+declare const star_p89: SmallStar;
+declare const stars: Record<StarID, Star>;
+
+declare const this_player_id: PlayerID;
+declare const players: { p1: PlayerID, p2: PlayerID };
+
+declare const tick: number;
+
+declare const graphics: Graphics;
+
+declare function atob(input: string): Uint8Array;
+
+declare const console: {
+	log(...args: string[]): void;
+};
+
+declare const CODE_VERSION: string;

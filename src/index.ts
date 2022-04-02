@@ -15,7 +15,7 @@ export const Distance = (p1: Position, p2: Position): number => {
     )
 }
 
-function findClosestStar(): Star {
+function findClosestStar(): LargeStar {
     return Distance(
         base.position,
         star_a1c.position
@@ -123,7 +123,7 @@ for (var soldier of soldier_fleet) {
         if (soldier.energy >= 5) soldier.set_mark("attacker")
         if (soldier.mark == "attacker") {
             if (structure_in_sight.length > 0) {
-                //soldier.move(structure_in_sight[0])
+                soldier.move(structure_in_sight[0])
                 soldier.energize(invader)
             }
         }
