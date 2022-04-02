@@ -76,6 +76,7 @@ for (var soldier of soldier_fleet) {
     var soldier_closest_star = ClosestStar;
 
     var enemy_in_sight = soldier.sight.enemies;
+    var closest_ennemy = soldier.sight.enemies[0]
     var structure_in_sight = soldier.sight.structures;
     
     
@@ -86,8 +87,8 @@ for (var soldier of soldier_fleet) {
         case 'attacker':
             soldier.move(soldier_target.position)
 
-            if (enemy_in_sight[0] || soldier.energy > 5) {
-                soldier.energize(enemy_in_sight[0]);
+            if (closest_ennemy || soldier.energy > 5) {
+                soldier.energize(closest_ennemy);
             } else {
                 soldier.set_mark("harvester")
             }
