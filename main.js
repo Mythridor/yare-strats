@@ -47,6 +47,14 @@ for (var fleet of worker_fleet) {
 
 
 for (var soldier of soldier_fleet) {
+    var soldier_target = star_p89
+    var soldier_closest_star = star_p89
+
+    enemy_in_sight = soldier.sight.enemies
+    structure_in_sight = soldier.sight.structures
+    
+    var invader = enemy_in_sight[0]
+    
     switch (soldier.mark) {
         case 'harvester':
             soldier.move(soldier_closest_star.position);
