@@ -79,7 +79,16 @@ for (var soldier of soldier_fleet) {
     var closest_ennemy = soldier.sight.enemies[0]
     var structure_in_sight = soldier.sight.structures;
     
-    
+    console.log("Stats:")
+    console.log("--------------------------------------")
+    console.log("Workers:", worker_fleet_A.length + worker_fleet_B.length -2)
+    console.log("Fleet A:", worker_fleet_A.length-1)
+    console.log("Fleet B:", worker_fleet_B.length-1)
+    console.log("Soldiers:")
+    console.log("Fleet A:", soldier_fleet.length-1)
+    console.log("Enemies in sight:", enemy_in_sight)
+    console.log("Closest enemy:", enemy_in_sight[0])
+
     switch (soldier.mark) {
         case 'harvester':
             soldier.move(soldier_closest_star.position);
