@@ -1,7 +1,30 @@
+/**
+ * This file is the entry point for your bot.
+ */
+
+import RenderService from 'yare-code-sync/client/RenderService'
+
 // Your code goes here
 // Activate it by pressing the button below or with SHIFT+ENTER
 
-size = my_spirits.length / 3
+export const Distance = (p1: Position, p2: Position): number => {
+    return Math.sqrt(
+        Math.pow(p2[0] - p1[0], 2) +
+        Math.pow(p2[1] - p1[1], 2)
+    )
+}
+
+export const ClosestStar = (): Star => {
+    return Distance(
+        base.position,
+        star_a1c.position
+    ) < Distance(
+        base.position,
+        star_zxq.position
+    ) ? star_a1c : star_zxq
+}
+
+var size = my_spirits.length / 3
 
 var worker_fleet_A = my_spirits.slice(0, size)
 var worker_fleet_B = my_spirits.slice(size, 2*size)
@@ -9,16 +32,15 @@ var worker_fleet_B = my_spirits.slice(size, 2*size)
 var worker_fleet = [worker_fleet_A, worker_fleet_B]
 
 var soldier_fleet = my_spirits.slice(2*size, my_spirits.length)
-var enemy_in_sight;
 
 for (var fleet of worker_fleet) {
     for (var worker of fleet) {
         var target;
     
         if(worker_fleet_A.includes(worker)) {
-            target = star_p89
+            target = ClosestStar
         } else if (worker_fleet_B.includes(worker)) {
-            target = star_zxq
+            target = ClosestStar
         } else {
             target = base
         }
@@ -47,13 +69,12 @@ for (var fleet of worker_fleet) {
 
 
 for (var soldier of soldier_fleet) {
-    var soldier_target = star_p89
-    var soldier_closest_star = star_p89
+    var soldier_target = base;
+    var soldier_closest_star = ClosestStar;
 
-    enemy_in_sight = soldier.sight.enemies
-    structure_in_sight = soldier.sight.structures
+    var enemy_in_sight = soldier.sight.enemies;
+    var structure_in_sight = soldier.sight.structures;
     
-    var invader = enemy_in_sight[0]
     
     switch (soldier.mark) {
         case 'harvester':
@@ -62,8 +83,8 @@ for (var soldier of soldier_fleet) {
         case 'attacker':
             soldier.move(soldier_target.position)
 
-            if (invader || soldier.energy > 5) {
-                soldier.energize(invader);
+            if (enemy_in_sight[0] || soldier.energy > 5) {
+                soldier.energize(enemy_in_sight[0]);
             } else {
                 soldier.set_mark("harvester")
             }
@@ -82,15 +103,15 @@ for (var soldier of soldier_fleet) {
             soldier.set_mark("attacker")
         }
     }
-
+    
     if (structure_in_sight.length > 0){
         var invader = structure_in_sight[0]
-    
+        
         if (soldier.energy >= 5) soldier.set_mark("attacker")
         if (soldier.mark == "attacker") {
             if (structure_in_sight.length > 0) {
                 //soldier.move(structure_in_sight[0])
-            soldier.energize(invader)
+                soldier.energize(invader)
             }
         }
     }
