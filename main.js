@@ -69,16 +69,29 @@ for (var soldier of soldier_fleet) {
             }
     }
 
-    var soldier_target = star_p89
-    var soldier_closest_star = star_p89
-
-    enemy_in_sight = soldier.sight.enemies
-    structure_in_sight = soldier.sight.structures
+    if (soldier.energy <= soldier.energy_capacity) {
+            soldier.set_mark("harvester")
+    }
     
-    var invader = enemy_in_sight[0]
+    if (enemy_in_sight.length > 0){
+        if (soldier.energy <= soldier.energy_capacity) {
+            soldier.move(soldier_closest_star.position)
+            soldier.set_mark("harvester")
+        }
+        if (enemy_in_sight && soldier.energy > 5) {
+            soldier.set_mark("attacker")
+        }
+    }
+
+    if (structure_in_sight.length > 0){
+        var invader = structure_in_sight[0]
+    
+        if (soldier.energy >= 5) soldier.set_mark("attacker")
         if (soldier.mark == "attacker") {
-            soldier.move(invader.position)
+            if (structure_in_sight.length > 0) {
+                //soldier.move(structure_in_sight[0])
             soldier.energize(invader)
+            }
         }
     }
 }
