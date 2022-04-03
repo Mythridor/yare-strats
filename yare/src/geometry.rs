@@ -12,13 +12,13 @@ pub struct Point {
 
 
 pub trait VectorialCalculus {
-    fn define_vector(A: Point, B: Point) -> Vector;
+    fn define_vector(a: Point, b: Point) -> Vector;
 }
 
 impl VectorialCalculus for Point {
-    fn define_vector(A: Point, B: Point) -> Vector {
-        let dx = B.x - A.x;
-        let dy = B.y - A.y;
+    fn define_vector(a: Point, b: Point) -> Vector {
+        let dx = b.x - a.x;
+        let dy = b.y - a.y;
         Vector {dx, dy}
     }
 }
