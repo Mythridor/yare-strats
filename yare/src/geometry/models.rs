@@ -1,4 +1,4 @@
-pub enum Structure {
+pub enum StructureType {
     Star,
     Outpost,
     Base,

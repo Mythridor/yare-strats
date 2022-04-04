@@ -1,5 +1,5 @@
 use crate::geometry::Point;
-use crate::geometry::models::Structure;
+use crate::geometry::models::StructureType;
 
 pub trait Distance {
 
@@ -13,7 +13,7 @@ pub trait Distance {
     ///
     /// Given that the destination point is a structure defined in the enum and that it returns the closest one. 
     /// A match will to behave accordingly to the nature of the structure.
-    fn define_closest_structure() -> Structure;
+    fn define_closest_structure() -> StructureType;
 
 
 }
