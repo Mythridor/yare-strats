@@ -1,14 +1,17 @@
-use yareio::spirit::{position, energy};
+use yareio::spirit;
+use yareio::player;
+use yareio::position::Position;
+
 use crate::geometry::models::SpiritSpecialty;
-use crate::geometry::Vector;
+use crate::geometry::{Vector, Point, VectorialCalculus};
 
 struct Spirit {
     specialty: SpiritSpecialty,
-    index: usized,
+    index: usize,
     alive: bool,
     friendly: bool,
-    energy: energy,
-    position: position,
+    energy: i32,
+    position: Position,
 }
 
 trait Behave {
