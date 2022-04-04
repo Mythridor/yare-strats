@@ -46,6 +46,8 @@ impl Behave for Spirit {
         }
     }
     fn goto(&mut self, vector: Vector, distance: f32) {
+        let to_x: f32;
+        let to_y: f32;
 
         self.status = SpiritStatus::InTransit;
 
