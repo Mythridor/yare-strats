@@ -8,6 +8,8 @@ pub struct Vector {
     pub dy: i32
 }
 
+#[derive(Debug)]
+#[derive(PartialEq)]
 pub struct Point {
     pub x: i32,
     pub y: i32
