@@ -12,6 +12,9 @@ struct Spirit {
 }
 
 trait Behave {
-    fn move_to(&self, vector: Vector);
+    fn get_all() -> Vec<Spirit>;
+    fn goto(&self, vector: Vector, distance: f32);
+    fn behave();
+}
 }
 
