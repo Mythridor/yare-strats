@@ -1,5 +1,5 @@
 mod distance;
-mod models;
+pub mod models;
 
 #[derive(Debug)]
 #[derive(PartialEq)]
