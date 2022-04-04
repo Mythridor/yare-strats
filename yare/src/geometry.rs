@@ -4,15 +4,15 @@ mod models;
 #[derive(Debug)]
 #[derive(PartialEq)]
 pub struct Vector {
-    pub dx: i32,
-    pub dy: i32
+    pub dx: f32,
+    pub dy: f32
 }
 
 #[derive(Debug)]
 #[derive(PartialEq)]
 pub struct Point {
-    pub x: i32,
-    pub y: i32
+    pub x: f32,
+    pub y: f32
 }
 
 
