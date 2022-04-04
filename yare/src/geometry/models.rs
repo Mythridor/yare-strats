@@ -1,13 +1,13 @@
-enum structure {
-    star,
-    outpost,
-    base,
+pub enum Structure {
+    Star,
+    Outpost,
+    Base,
 }
 
 
 //TODO: Implement function injection as behaviour selector during match
-enum spirit_specialty {
-    soldier,      //Soldiers defends and attacks at will
-    harvester,    //Harvesters have basic implementation of energy harvesting
-    provisionner, //Provisionners convoys energy from one source to a destination
+enum SpiritSpecialty {
+    Soldier,      //Soldiers defends and attacks at will
+    Harvester,    //Harvesters have basic implementation of energy harvesting
+    Provisionner, //Provisionners convoys energy from one source to a destination
 }
