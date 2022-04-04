@@ -16,3 +16,9 @@ pub enum SpiritStatus {
     InTransit,
     Available
 }
+
+pub enum SpiritShape {
+    Circle,
+    Triangle,
+    Square
+}

@@ -2,11 +2,12 @@ use yareio::spirit;
 use yareio::player;
 use yareio::position::Position;
 
-use crate::geometry::models::{SpiritStatus, SpiritSpecialty};
+use crate::geometry::models::{SpiritStatus, SpiritSpecialty, SpiritShape};
 use crate::geometry::{Vector, Point, VectorialCalculus};
 
 struct Spirit {
     specialty: SpiritSpecialty,
+    shape: SpiritShape,
     index: usize,
     alive: bool,
     friendly: bool,
@@ -22,6 +23,8 @@ trait Behave {
     fn behave();
 }
 
+
+//TODO : Implement shape when not using 'Circle only' rule anymore
 impl Behave for Spirit {
     fn get_all() -> Vec<Spirit> {
         unsafe {
@@ -32,6 +35,7 @@ impl Behave for Spirit {
                 spirits.push(Spirit {
                     index,
                     specialty: SpiritSpecialty::Harvester,
+                    shape: SpiritShape::Circle,
                     energy: spirit::energy(index),
                     position: spirit::position(index),
                     alive: spirit::hp(index) > 0,
