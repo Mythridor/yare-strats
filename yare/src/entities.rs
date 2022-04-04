@@ -34,7 +34,15 @@ impl Behave for Spirit {
                 spirits.push(Spirit {
                     index,
                     specialty: SpiritSpecialty::Harvester,
-                    shape: SpiritShape::Circle,
+                    shape: if spirit::shape(index) == 0 {
+                            SpiritShape::Circle
+                      } else if spirit::shape(index) == 1 {
+                            SpiritShape::Square
+                      } else if spirit::shape(index) == 2 {
+                            SpiritShape::Triangle
+                      } else {
+                            SpiritShape::Unknown
+                      },
                     energy: spirit::energy(index),
                     position: spirit::position(index),
                     alive: spirit::hp(index) > 0,

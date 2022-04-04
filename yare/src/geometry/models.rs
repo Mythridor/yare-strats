@@ -20,5 +20,6 @@ pub enum SpiritStatus {
 pub enum SpiritShape {
     Circle,
     Triangle,
-    Square
+    Square,
+    Unknown
 }
