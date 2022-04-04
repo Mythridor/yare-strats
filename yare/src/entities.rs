@@ -2,7 +2,7 @@ use yareio::spirit;
 use yareio::player;
 use yareio::position::Position;
 
-use crate::geometry::models::SpiritSpecialty;
+use crate::geometry::models::{SpiritStatus, SpiritSpecialty};
 use crate::geometry::{Vector, Point, VectorialCalculus};
 
 struct Spirit {
@@ -12,6 +12,7 @@ struct Spirit {
     friendly: bool,
     energy: i32,
     position: Position,
+    status: SpiritStatus
 }
 
 trait Behave {
@@ -33,7 +34,8 @@ impl Behave for Spirit {
                     energy: spirit::energy(index),
                     position: spirit::position(index),
                     alive: spirit::hp(index) > 0,
-                    friendly: spirit::id(index).number == me
+                    friendly: spirit::id(index).number == me,
+                    status: SpiritStatus::Available
                 });
             }
             spirits
@@ -44,14 +46,17 @@ impl Behave for Spirit {
         let mut to_x: f32;
         let mut to_y: f32;
 
-        unsafe {
+        self.status = SpiritStatus::InTransit;
 
-        
+        unsafe {        
             let pos = spirit::position(self.index);
             let vector = Point::unitirize_vector(vector);
             to_x = pos.x + vector;
             spirit::goto(self.index, to_x, to_y)
         }
+
+        self.status = SpiritStatus::Available;
+    }
     }
 
     fn behave() {
