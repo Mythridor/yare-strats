@@ -11,3 +11,8 @@ pub enum SpiritSpecialty {
     Harvester,    //Harvesters have basic implementation of energy harvesting
     Provisionner, //Provisionners convoys energy from one source to a destination
 }
+
+pub enum SpiritStatus {
+    InTransit,
+    Available
+}
