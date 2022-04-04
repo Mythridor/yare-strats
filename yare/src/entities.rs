@@ -19,11 +19,12 @@ struct Spirit {
 trait Behave {
     fn get_all() -> Vec<Spirit>;
     fn goto(&mut self, vector: Vector, distance: f32);
+    fn goto_point(&mut self, to: Point);
     fn behave(spirits: Vec<Spirit>);
 }
 
 
-//TODO : Implement shape when not using 'Circle only' rule anymore
+//TODO : Implement Triangle shape ?
 impl Behave for Spirit {
     fn get_all() -> Vec<Spirit> {
         unsafe {
@@ -53,6 +54,7 @@ impl Behave for Spirit {
             spirits
         }
     }
+    #[warn(unused_variables)]
     fn goto(&mut self, vector: Vector, distance: f32) {
         let to_x: f32;
         let to_y: f32;
@@ -70,7 +72,7 @@ impl Behave for Spirit {
         self.status = SpiritStatus::Available;
     }
 
-    fn goto_point(&self, to: Point) {
+    fn goto_point(&mut self, to: Point) {
 
     }
 
