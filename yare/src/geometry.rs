@@ -1,3 +1,6 @@
+mod distance;
+mod models;
+
 #[derive(Debug)]
 #[derive(PartialEq)]
 pub struct Vector {
