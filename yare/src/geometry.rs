@@ -17,8 +17,6 @@ pub trait VectorialCalculus {
 
 impl VectorialCalculus for Point {
     fn define_vector(a: Point, b: Point) -> Vector {
-        let dx = b.x - a.x;
-        let dy = b.y - a.y;
-        Vector {dx, dy}
+        Vector {dx: b.x - a.x, dy: b.y - a.y}
     }
 }
