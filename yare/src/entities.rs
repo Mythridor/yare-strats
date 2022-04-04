@@ -18,6 +18,7 @@ struct Spirit {
 trait Behave {
     fn get_all() -> Vec<Spirit>;
     fn goto(&self, vector: Vector, distance: f32);
+    fn goto_point(self, to: Point);
     fn behave();
 }
 
@@ -57,6 +58,9 @@ impl Behave for Spirit {
 
         self.status = SpiritStatus::Available;
     }
+
+    fn goto_point(&self, to: Point) {
+
     }
 
     fn behave() {
