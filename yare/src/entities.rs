@@ -18,8 +18,7 @@ struct Spirit {
 
 trait Behave {
     fn get_all() -> Vec<Spirit>;
-    fn goto(&self, vector: Vector, distance: f32);
-    fn goto_point(self, to: Point);
+    fn goto(&mut self, vector: Vector, distance: f32);
     fn behave(spirits: Vec<Spirit>);
 }
 
@@ -46,10 +45,7 @@ impl Behave for Spirit {
             spirits
         }
     }
-
-    fn goto(&self, vector: Vector, distance: f32) {
-        let mut to_x: f32;
-        let mut to_y: f32;
+    fn goto(&mut self, vector: Vector, distance: f32) {
 
         self.status = SpiritStatus::InTransit;
 
