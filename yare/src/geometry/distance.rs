@@ -1,5 +1,5 @@
 use crate::geometry::Point;
-use crate::geometry::models::StructureType;
+use crate::entities::structure::StructureType;
 
 pub trait Distance {
 

@@ -1,5 +1,4 @@
 mod distance;
-pub mod models;
 
 #[derive(Debug, PartialEq, Clone, Copy)]
 pub struct Vector {
