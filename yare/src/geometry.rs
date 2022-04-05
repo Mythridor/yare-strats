@@ -1,15 +1,13 @@
 mod distance;
 pub mod models;
 
-#[derive(Debug)]
-#[derive(PartialEq)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub struct Vector {
     pub dx: f32,
     pub dy: f32
 }
 
-#[derive(Debug)]
-#[derive(PartialEq)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub struct Point {
     pub x: f32,
     pub y: f32
