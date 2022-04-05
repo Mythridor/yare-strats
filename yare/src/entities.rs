@@ -12,6 +12,7 @@ struct Spirit {
     alive: bool,
     friendly: bool,
     energy: i32,
+    energy_capacity: i32,
     position: Position,
     status: SpiritStatus
 }
@@ -45,6 +46,7 @@ impl Behave for Spirit {
                             SpiritShape::Unknown
                       },
                     energy: spirit::energy(index),
+                    energy_capacity: spirit::energy_capacity(index),
                     position: spirit::position(index),
                     alive: spirit::hp(index) > 0,
                     friendly: spirit::id(index).number == me,
