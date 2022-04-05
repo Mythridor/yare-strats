@@ -23,11 +23,14 @@ struct Structure {
     energy: i32,
     position: Position,
 }
+
 trait Behave {
     fn get_all() -> Vec<Spirit>;
     fn goto(&mut self, vector: Vector, distance: f32);
     fn goto_point(&mut self, to: Point);
     fn behave(spirits: Vec<Spirit>);
+    fn energize(&self, target:&Self);
+    fn energize_structure(&self, target: &Structure);
 }
 
 
@@ -80,9 +83,9 @@ impl Behave for Spirit {
         self.status = SpiritStatus::Available;
     }
 
-    fn goto_point(&mut self, to: Point) {
-
-    }
+    fn goto_point(&mut self, to: Point) {}
+    fn energize(&self, target:&Self) {}
+    fn energize_structure(&self, target: &Structure) {}
 
     fn behave(spirits: Vec<Spirit>) {
         for spirit in spirits {
