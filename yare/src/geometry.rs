@@ -18,7 +18,7 @@ pub struct Point {
 
 pub trait VectorialCalculus {
     fn define_vector(a: Point, b: Point) -> Vector;
-    fn unitirize_vector(vector: Vector) -> Vector;
+    fn normalize(vector: Vector) -> Vector;
 }
 
 impl VectorialCalculus for Point {
@@ -26,7 +26,7 @@ impl VectorialCalculus for Point {
         Vector {dx: b.x - a.x, dy: b.y - a.y}
     }
 
-    fn unitirize_vector(vector: Vector) -> Vector {
+    fn normalize(vector: Vector) -> Vector {
         vector
     }
 }

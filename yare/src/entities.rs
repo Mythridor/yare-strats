@@ -63,7 +63,7 @@ impl Behave for Spirit {
 
         unsafe {        
             let pos = spirit::position(self.index);
-            let vector = Point::unitirize_vector(vector);
+            let vector = Point::normalize(vector);
             to_x = pos.x + vector.dx;
             to_y = pos.y + vector.dy;
             spirit::goto(self.index, to_x, to_y)
