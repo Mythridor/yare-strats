@@ -2,7 +2,7 @@ use yareio::spirit;
 use yareio::player;
 use yareio::position::Position;
 
-use crate::geometry::models::{SpiritStatus, SpiritSpecialty, SpiritShape};
+use crate::geometry::models::{SpiritStatus, SpiritSpecialty, SpiritShape, StructureType};
 use crate::geometry::{Vector, Point, VectorialCalculus};
 
 struct Spirit {
@@ -17,6 +17,12 @@ struct Spirit {
     status: SpiritStatus
 }
 
+struct Structure {
+    name: String,
+    structure_type: StructureType,
+    energy: i32,
+    position: Position,
+}
 trait Behave {
     fn get_all() -> Vec<Spirit>;
     fn goto(&mut self, vector: Vector, distance: f32);
