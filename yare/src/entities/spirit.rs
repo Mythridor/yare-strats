@@ -61,6 +61,28 @@ impl Behave for Spirit {
         }
     }
 
+    fn get_my_spirits() -> Vec<Spirit> {
+        let spirits = crate::entities::spirit::Spirit::get_all();
+        let mut my_spirits: Vec<Spirit> = Vec::new();
+        for spirit in &spirits {
+          if spirit.friendly {
+            my_spirits.push(*spirit)
+          }
+        }
+        my_spirits
+      }
+      
+
+    fn get_my_alive_spirits() -> Vec<Spirit> {
+        let spirits = crate::entities::spirit::Spirit::get_my_spirits();
+        let mut my_alive_spirits: Vec<Spirit> = Vec::new();
+        for spirit in &spirits {
+          if spirit.alive {
+            my_alive_spirits.push(*spirit)
+          }
+        }
+        my_alive_spirits
+      }
 
     #[warn(unused_variables)]
     fn goto(&mut self, vector: Vector, distance: f32) {
