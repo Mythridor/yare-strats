@@ -17,11 +17,16 @@ struct Spirit {
     status: SpiritStatus
 }
 
-struct Structure {
-    name: String,
+pub struct Structure {
+    pub index: usize,
+    pub position: Position,
+    pub energy: i32,
     structure_type: StructureType,
-    energy: i32,
-    position: Position,
+    pub energy_capacity: Option<i32>,
+    pub current_spirit_cost: Option<i32>,
+    pub alive: Option<bool>,
+    pub player_id: Option<usize>,
+    pub range: Option<u32>,
 }
 
 trait Behave {
