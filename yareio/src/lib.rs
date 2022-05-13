@@ -1,6 +1,8 @@
-#![allow(clashing_extern_declarations)]
-
 use std::ffi::CString;
+use yareio::spirit;
+use yareio::player;
+
+/// Your own Spirit struct with all the information you want.
 struct Spirit {
     index: usize,
     alive: bool,
@@ -8,32 +10,36 @@ struct Spirit {
 }
 
 impl Spirit {
+    /// Safe wrapper for moving a spirit.
     fn goto(&self, x: f32, y: f32) {
-        unsafe { bindings::spirit::goto(self.index, x, y) }
+        unsafe { spirit::goto(self.index, x, y) }
     }
 
+    /// Safe wrapper for using shout.
     fn shout(&self, string: &str) {
         let c_string = CString::new(string).unwrap();
-        unsafe { bindings::spirit::shout(self.index, c_string.as_ptr()) }
+        unsafe { spirit::shout(self.index, c_string.as_ptr()) }
     }
 }
 
+/// Parse all spirits into your own Spirit structs.
 fn get_spirits() -> Vec<Spirit> {
     unsafe {
-        let me = bindings::player::me();
-        let count = bindings::spirit::count();
+        let me: usize = player::me();
+        let count = spirit::count();
         let mut spirits = Vec::with_capacity(count);
         for index in 0..count {
             spirits.push(Spirit {
                 index,
-                alive: bindings::spirit::hp(index) > 0,
-                friendly: bindings::spirit::id(index).number == me,
+                alive: spirit::hp(index) > 0,
+                friendly: spirit::player_id(index) == me,
             });
         }
         spirits
     }
 }
 
+// No unsafe block needed here!
 #[no_mangle]
 pub extern "C" fn tick(_tick: u32) {
     let all_spirits = get_spirits();
@@ -44,11 +50,3 @@ pub extern "C" fn tick(_tick: u32) {
         }
     }
 }
-
-#[cfg(not(feature = "headless"))]
-pub mod bindings;
-
-#[cfg(feature = "headless")]
-pub mod headless;
-
-
