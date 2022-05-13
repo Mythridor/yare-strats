@@ -1,26 +1,13 @@
 [package]
-name = "yareio"
-version = "0.1.4"
-edition = "2018"
-description = "Lightweight rust bindings for yare.io with plentiful documentation and helpful constants."
-readme = "README.md"
-repository = "https://github.com/ViliamVadocz/yare-rust"
-license = "GPL-2.0-or-later"
-keywords = ["yare", "yareio", "bindings", "wasm", "webassembly"]
-categories = ["external-ffi-bindings", "games", "wasm"]
+name = "yare"
+version = "0.1.0"
+edition = "2021"
 
 [lib]
-name = "yareio"
-crate-type = ["rlib", "dylib", "cdylib"]
-
-[features]
-headless = ["rand", "serde", "serde_json"]
+crate-type = ["cdylib"]
 
 [dependencies]
-rand = { version = "0.8.4", optional = true }
-serde = { version = "1.0", features = ["derive"], optional = true }
-serde_json = { version = "1.0", optional = true }
-yareio = "0.1.4"
+yareio = "0.1"
 
 [profile.release]
 opt-level = "s"
