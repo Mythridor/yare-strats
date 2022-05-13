@@ -1,6 +1,6 @@
 # Introduction
 
-This bot is based on the project from @ViliamVadocz with this repository [yare-rust](https://github.com/ViliamVadocz/yare-rust)
+This bot is based on the project from [@ViliamVadocz](https://github.com/ViliamVadocz) with this repository [yare-rust](https://github.com/ViliamVadocz/yare-rust).  
 Many thanks to you, my fellow developper!
 
 # Yare-Rust
